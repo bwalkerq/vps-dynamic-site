@@ -1,9 +1,12 @@
 const express = require('express')
 const mongoose = require("mongoose");
+require('dotenv').config()
 const app = express()
 
-if (process.argv.length < 3) {
-  console.log('give password as argument')
+
+const url = process.env.MONGODB_URI
+if (!url) {
+  console.log('MONGODB_URI not set')
   process.exit(1)
 }
 
