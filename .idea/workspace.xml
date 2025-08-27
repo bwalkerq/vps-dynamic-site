@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb002210-cff6-453f-8bf0-0dc0748180a7" name="Changes" comment="Update project configuration: adjust module filepath and refine `.gitignore` for `client/node_modules`">
-      <change afterPath="$PROJECT_DIR$/backend/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/mongo.js" afterDir="false" />
+    <list default="true" id="eb002210-cff6-453f-8bf0-0dc0748180a7" name="Changes" comment="Initialize backend directory with Node.js configuration and dependencies (Express, Mongoose)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +50,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Node.js.App.jsx.executor": "Run",
     "Node.js.index.js.executor": "Run",
     "Node.js.mongo.js.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -89,7 +90,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1756293689167</updated>
-      <workItem from="1756293691236" duration="6990000" />
+      <workItem from="1756293691236" duration="7986000" />
     </task>
     <task id="LOCAL-00001" summary="Initialize Vite + React project with ESLint configuration">
       <option name="closed" value="true" />
@@ -131,7 +132,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756296599620</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Initialize backend directory with Node.js configuration and dependencies (Express, Mongoose)">
+      <option name="closed" value="true" />
+      <created>1756304213274</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1756304213274</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -144,6 +153,7 @@
     <MESSAGE value="Reinitialize project structure and configurations for Vite + React" />
     <MESSAGE value="Restructure project by moving all files into a `client` directory" />
     <MESSAGE value="Update project configuration: adjust module filepath and refine `.gitignore` for `client/node_modules`" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update project configuration: adjust module filepath and refine `.gitignore` for `client/node_modules`" />
+    <MESSAGE value="Initialize backend directory with Node.js configuration and dependencies (Express, Mongoose)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initialize backend directory with Node.js configuration and dependencies (Express, Mongoose)" />
   </component>
 </project>

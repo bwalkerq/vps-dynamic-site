@@ -2,6 +2,20 @@ const express = require('express')
 const mongoose = require("mongoose");
 const app = express()
 
+if (process.argv.length < 3) {
+  console.log('give password as argument')
+  process.exit(1)
+}
+
+const db_password = process.argv[2]
+
+const url =
+  `mongodb+srv://benjaminqwalker:${db_password}@cluster0.dfi3fzy.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0`
+
+mongoose.set('strictQuery',false)
+
+mongoose.connect(url)
+
 let neighbors = [
   {
     id: '1',
@@ -39,6 +53,16 @@ const neighborSchema = new mongoose.Schema({
 })
 
 const Neighbor = mongoose.model('Neighbor', neighborSchema)
+
+const neighbor = new Neighbor({
+  neighbor: 'other neighb',
+  specialPower: 'Lightspeed Warp',
+})
+
+neighbor.save().then(result => {
+  console.log('neighbor saved!')
+  mongoose.connection.close()
+})
 
 app.post('/api/neighbors', (req, res) => {
   const neighbor = req.body
