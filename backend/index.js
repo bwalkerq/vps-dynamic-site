@@ -20,6 +20,8 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
   })
 
 app.use(express.json())
+const cors = require('cors')
+app.use(cors()) // allow all origins (use cautiously in production)
 
 const neighborSchema = new mongoose.Schema({
   neighbor: { type: String, required: true },
