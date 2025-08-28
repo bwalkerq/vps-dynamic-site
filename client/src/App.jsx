@@ -119,7 +119,7 @@ const App = () => {
 
   const addNeighbor = async (neighborData) => {
     try {
-      const response = await fetch('/api/neighbors', {
+      const response = await fetch(`${baseurl}/api/neighbors`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(neighborData)
@@ -134,7 +134,7 @@ const App = () => {
 
   const addPet = async (petData) => {
     try {
-      const response = await fetch('/api/pets', {
+      const response = await fetch(`${baseurl}/api/pets`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(petData)
