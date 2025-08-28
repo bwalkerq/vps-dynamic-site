@@ -1,8 +1,8 @@
 const express = require('express')
 const mongoose = require("mongoose");
+const {Client} = require('pg')
 require('dotenv').config()
 const app = express()
-
 
 const url = process.env.MONGODB_URI
 if (!url) {
@@ -42,7 +42,7 @@ app.get('/api/neighbors', async (req, res) => {
   }
 })
 
-// POST /api/neighbors - create a new neighbor (whitelist fields + validation)
+// POST /api/neighbors - create a new neighbor (allowlisted fields plus validation)
 app.post('/api/neighbors', async (req, res) => {
   try {
     const payload = req.body
@@ -59,6 +59,51 @@ app.post('/api/neighbors', async (req, res) => {
     res.status(500).json({ error: 'Server error' })
   }
 })
+
+function makeClient(database = process.env.PGDB_NAME || 'pets') {
+  return new Client({
+    host: process.env.PGHOST || 'localhost',
+    port: Number(process.env.PGPORT || 5432),
+    user: process.env.PGUSER || 'postgres',
+    password: process.env.PGPASSWORD || '',
+    database,
+    ssl: false
+  })
+}
+
+app.get('/api/pets', async (req, res) => {
+  const client = makeClient()
+  try {
+    await client.connect()
+    const result = await client.query('SELECT * FROM pets')
+    res.json(result.rows)
+  } catch (err) {
+    res.status(500).json({error: 'Database error'})
+  } finally {
+    await client.end()
+  }
+})
+
+app.post('/api/pets', async (req, res) => {
+  const client = makeClient()
+  const {name, location, park} = req.body
+  try {
+    await client.connect()
+    const result = await client.query(
+      'INSERT INTO pets (name, location, park) VALUES ($1, $2, $3) RETURNING *',
+      [name, location, park]
+    )
+    res.status(201).json(result.rows[0])
+  } catch (err) {
+    if (err.code === '23505') {
+      return res.status(409).json({error: 'Pet name already exists'})
+    }
+    res.status(500).json({error: 'Database error'})
+  } finally {
+    await client.end()
+  }
+})
+
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => console.log('Server running on port 3001'))

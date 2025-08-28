@@ -8,3 +8,16 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3001/api/neighbors
+
+###
+GET http://localhost:3001/api/pets
+
+###
+POST http://localhost:3001/api/pets
+Content-Type: application/json
+
+{
+  "name": "test pet",
+  "location": "test location",
+  "park": "test park"
+}
