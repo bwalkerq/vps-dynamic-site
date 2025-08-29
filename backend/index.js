@@ -4,15 +4,11 @@ const {Client} = require('pg')
 require('dotenv').config()
 const app = express()
 
-const url = process.env.MONGODB_URI
-if (!url) {
-  console.log('MONGODB_URI not set')
-  process.exit(1)
-}
+const url = process.env.NEIGHBORS_DB_URI
 
 mongoose.set('strictQuery',false)
 
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(url)
   .then(() => console.log('MongoDB connected'))
   .catch(err => {
     console.error('MongoDB connection error:', err)
@@ -62,12 +58,13 @@ app.post('/api/neighbors', async (req, res) => {
   }
 })
 
-function makeClient(database = process.env.PGDB_NAME || 'pets') {
+function makeClient(database = process.env.PETS_DB_NAME || 'pets') {
+  console.log('connecting to db:')
   return new Client({
-    host: process.env.PGHOST || 'localhost',
-    port: Number(process.env.PGPORT || 5432),
-    user: process.env.PGUSER || 'postgres',
-    password: process.env.PGPASSWORD || '',
+    host: process.env.PETS_HOST || 'localhost',
+    port: Number(process.env.PETS_PORT || 5432),
+    user: process.env.PETS_USER || 'postgres',
+    password: process.env.PETS_PASSWORD || '',
     database,
     ssl: false
   })
@@ -75,6 +72,7 @@ function makeClient(database = process.env.PGDB_NAME || 'pets') {
 
 app.get('/api/pets', async (req, res) => {
   const client = makeClient()
+  console.log('connected to db')
   try {
     await client.connect()
     const result = await client.query('SELECT * FROM pets')

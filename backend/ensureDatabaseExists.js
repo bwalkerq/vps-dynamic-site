@@ -2,15 +2,15 @@ require('dotenv').config()
 const { Client } = require('pg')
 
 const MAINT_DB = process.env.PGMAINT_DB || 'postgres'
-const TARGET_DB = process.env.PGDB_NAME || 'pets'
-const USER = process.env.PGUSER || 'postgres'
+const TARGET_DB = process.env.PETS_DB_NAME || 'pets'
+const USER = process.env.PETS_USER || 'postgres'
 
 function makeClient(database = MAINT_DB) {
   return new Client({
-    host: process.env.PGHOST || 'localhost',
-    port: Number(process.env.PGPORT || 5432),
+    host: process.env.PETS_HOST || 'localhost',
+    port: Number(process.env.PETS_PORT || 5432),
     user: USER,
-    password: process.env.PGPASSWORD || '',
+    password: process.env.PETS_PASSWORD || '',
     database,
     // ssl: process.env.PGSSL ? { rejectUnauthorized: false } : undefined,
     ssl: false

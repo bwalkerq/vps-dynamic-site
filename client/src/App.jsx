@@ -90,7 +90,9 @@ const AddForm = ({type, onSubmit}) => {
 const App = () => {
   const [neighbors, setNeighbors] = useState([])
   const [pets, setPets] = useState([])
-  const baseurl = 'http://localhost:3001'
+  const baseurl = process.env.NODE_ENV === 'Production'
+    ? 'https://bqwalker.com'
+    : 'http://localhost:3001';
 
   useEffect(() => {
     fetchNeighbors()
